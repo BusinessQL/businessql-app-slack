@@ -1,2 +1,1 @@
-# businessql-app-slack
-Slack
+# SendGrid - BusinessQL App

@@ -1,0 +1,27 @@
+{
+  "version": "0.0.1-alpha",
+  "nameId": "slack",
+  "name": "Slack",
+  "categories": ["chat"],
+  "settings": {
+    "fields": [
+      {
+        "label": "Token",
+        "name": "token",
+        "type": "password"
+      }
+    ]
+  },
+  "api": {
+    "url": "https://us-east4-bql-production.cloudfunctions.net/slack"
+  },
+  "developer": {
+    "nameId": "businessql"
+  },
+  "logo": "https://raw.githubusercontent.com/BusinessQL/businessql-app-slack/main/images/logo.svg",
+  "theme": {
+    "colors": {
+      "primary": "#2EB67D"
+    }
+  }
+}
