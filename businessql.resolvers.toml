@@ -1,0 +1,13 @@
+[query]
+  [query.sendMessage]
+  type = "api"
+  url = "https://slack.com/api/chat.postMessage"
+  method = "POST"
+  [query.sendMessage.headers]
+    Authorization = "Bearer {data.token}"
+  [query.sendMessage.data]
+    channel = "{args.channel}"
+    text = "{args.message}"
+  [query.sendMessage.response]
+    [query.sendMessage.response.success]
+    sent = "{{result.ok}}"

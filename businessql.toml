@@ -1,0 +1,17 @@
+name = "Slack"
+nameId = "slack"
+categories = ["chat"]
+version = "0.0.1-alpha"
+logo = "https://raw.githubusercontent.com/BusinessQL/businessql-app-slack/main/images/logo.svg"
+
+[settings]
+  [settings.fields]
+  label = "Token"
+  name = "token"
+  type = "password"
+
+[developer]
+nameId = "businessql"
+
+[theme.colors]
+primary = "#3C1940"

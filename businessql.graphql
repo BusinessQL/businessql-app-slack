@@ -1,7 +1,7 @@
-type SendMessageResponse {
-  sent: Boolean!
-}
-
 type Query {
   sendMessage(channel: String, message: String!): SendMessageResponse
+}
+
+type SendMessageResponse {
+  sent: Boolean!
 }

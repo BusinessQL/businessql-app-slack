@@ -1,1 +1,1 @@
-# SendGrid - BusinessQL App
+# Slack - BusinessQL App
