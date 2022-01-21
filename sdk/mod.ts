@@ -1,4 +1,5 @@
 import { SendMessageOptions, SendMessageResult } from './types.ts';
+import { config } from './config.ts';
 
 const SLACK_API_KEY =
   Deno.env.get('SLACK_API_KEY') ||
@@ -7,6 +8,8 @@ const SLACK_API_KEY =
   '';
 
 export class Slack {
+  public static config = config;
+
   public static sendMessage = async ({
     channel,
     message,

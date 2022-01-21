@@ -1,7 +1,7 @@
 name = "Slack"
 nameId = "slack"
 categories = ["chat"]
-version = "0.0.2-alpha"
+version = "0.0.1"
 logo = "https://raw.githubusercontent.com/BusinessQL/businessql-app-slack/main/images/logo.svg"
 
 [settings]
