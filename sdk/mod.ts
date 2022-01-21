@@ -1,11 +1,9 @@
 import { SendMessageOptions, SendMessageResult } from './types.ts';
-import { config } from './config.ts';
-
-const SLACK_API_KEY =
-  Deno.env.get('SLACK_API_KEY') ||
-  Deno.env.get('BUSINESSQL_API_KEY') ||
-  Deno.env.get('API_KEY') ||
-  '';
+import { config } from '../config.ts';
+import {
+  BusinessQL,
+  gql,
+} from 'https://storage.nubo.codes/@businessql/businessql/0.0.2/mod.ts';
 
 export class Slack {
   public static config = config;
@@ -15,37 +13,23 @@ export class Slack {
     message,
     apiKey,
   }: SendMessageOptions): Promise<SendMessageResult> => {
-    const key = apiKey || SLACK_API_KEY;
-
-    if (!key) {
-      throw new Error('Missing variable Slack API key');
-    }
-
-    const response = await fetch('https://graphql.businessql.com', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': key,
+    const result = await BusinessQL.graphql<{
+      data: { sendMessage: { sent: boolean } };
+    }>({
+      query: gql`
+        query SendMessage($channel: String!, $message: String!) {
+          sendMessage(channel: $channel, message: $message) {
+            sent
+          }
+        }
+      `,
+      variables: {
+        channel,
+        message,
       },
-      body: JSON.stringify({
-        query: `query SendMessage($channel: String!, $message: String!) {
-            sendMessage(channel: $channel, message: $message) {
-              sent
-            }
-          }`,
-        variables: {
-          channel,
-          message,
-        },
-      }),
+      apiKeyName: 'SLACK_API_KEY',
+      apiKey,
     });
-    const result = await response.json();
-
-    if (result.errors) {
-      throw result.errors?.[0]?.message
-        ? new Error(result.errors?.[0]?.message)
-        : result.errors;
-    }
 
     return result.data.sendMessage;
   };
